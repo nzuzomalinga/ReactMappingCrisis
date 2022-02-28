@@ -1,8 +1,10 @@
+import './Styles/App.scss'
+
 export const App = ( ) => {
 
   return (
 
-    <div className="App">
+    <div className="main-wrapper">
 
       <h1>Map</h1>
     </div>
