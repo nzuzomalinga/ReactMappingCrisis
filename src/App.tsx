@@ -9,7 +9,7 @@ export const App = ( ) => {
 
   return (
   
-    <Map location={location.coordinates} />
+    <Map location={location} />
 
   );
 }
