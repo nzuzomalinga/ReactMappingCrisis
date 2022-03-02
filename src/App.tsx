@@ -1,12 +1,13 @@
 import './Styles/App.scss'
 import useGeoLocation from './Hooks/useGeolocation';
 import { Map } from './Components/Map';
-import { useState } from 'react'
+import { createContext, useState } from 'react'
 import { LoginScreen } from './Components/LoginScreen';
 
-export const App = () => {
+let loginItem: string = localStorage.getItem('loginData') as string
+const userContext = createContext(null)
 
-  let loginItem: string = localStorage.getItem('loginData') as string
+export const App = () => {
 
   const [loginData, setLoginData] = useState(
     loginItem
@@ -14,6 +15,7 @@ export const App = () => {
       : null
   );
 
+  
 
   const id: string = "33851024663-ovd2n28igfo9kpp2s92hq47bqjjlgjs2.apps.googleusercontent.com"
   const location = useGeoLocation()
@@ -42,12 +44,15 @@ export const App = () => {
     setLoginData(null);
   };
 
-  console.log(loginData, id)
+
+
   return (<>
     {
       loginData ?
 
-        <Map location={location} logout= {handleLogout} />
+        <userContext.Provider value={loginData}>
+          <Map location={location} logout= {handleLogout} user={loginData} />
+        </userContext.Provider>
         
         :
 

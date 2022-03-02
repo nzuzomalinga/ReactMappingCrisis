@@ -2,15 +2,17 @@ import { MapContainer, Marker, Popup, TileLayer, } from 'react-leaflet'
 import { Audio } from 'react-loader-spinner'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import '../Styles/Components/Maps.scss'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { SearchBar } from './SearchBar'
 
-export const Map = ({ location, logout }: any) => {
+export const Map = ({ location, logout, user }: any) => {
 
   const [results, setResults] = useState([{}])
 
   //const provider = new OpenStreetMapProvider()
   //const result = provider.search({ query: "postnet johannesburg" })
+
+  console.log(user.picture)
 
   return (
 
@@ -25,7 +27,9 @@ export const Map = ({ location, logout }: any) => {
 
         <Marker position={[location.coordinates.lat, location.coordinates.lng]}>
           <Popup>
-            You are Here. <br /> Easily customizable.
+            <b>Your current location</b>
+             <br /> 
+             <img src={user.picture} style={{paddingLeft:"10px"}}/>.
           </Popup>
         </Marker>
       </MapContainer>
