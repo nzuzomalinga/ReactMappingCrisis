@@ -2,17 +2,39 @@ import { MapContainer, Marker, Popup, TileLayer, } from 'react-leaflet'
 import { Audio } from 'react-loader-spinner'
 import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import '../Styles/Components/Maps.scss'
-import { useContext, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { SearchBar } from './SearchBar'
 
 export const Map = ({ location, logout, user }: any) => {
 
-  const [results, setResults] = useState([{}])
+  const [crisis, setCrisis] = useState( [{}] )
+  const [selected, setSelected] = useState( {} )
+  const [search, setSearch] = useState( "" )
+  const [places, setPlaces] = useState( [{}] )
+  const [visible, setVisibility] = useState(false)
 
-  //const provider = new OpenStreetMapProvider()
-  //const result = provider.search({ query: "postnet johannesburg" })
+  const provider = new OpenStreetMapProvider( )
 
-  console.log(user.picture)
+
+  useEffect( ( ) => {
+
+    provider.search({ query: search}).then( (res) => {
+      setPlaces(res)
+      setVisibility(true)
+    })
+  }, [search] )
+  
+  
+  const places_query = ( e : any ) => {
+    setSearch(e.target.value)
+  }
+
+  const retrievePlace = ( place : any ) => {
+    setSelected( place )
+  }
+
+
+  console.log(selected,)
 
   return (
 
@@ -35,6 +57,7 @@ export const Map = ({ location, logout, user }: any) => {
       </MapContainer>
 
       <button id='logout-btn' onClick={logout}>Logout</button>
+      <SearchBar query={places_query} results={places} retrieve = {retrievePlace} visible={visible} setVisible = {setVisibility}/>
     </>
       : <div className='loading-screen'>
         <Audio
