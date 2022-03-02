@@ -4,37 +4,15 @@ import { OpenStreetMapProvider } from 'leaflet-geosearch'
 import '../Styles/Components/Maps.scss'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { SearchBar } from './SearchBar'
+import { Panel } from './Panel'
+
+
 
 export const Map = ({ location, logout, user }: any) => {
 
   const [crisis, setCrisis] = useState( [{}] )
-  const [selected, setSelected] = useState( {} )
-  const [search, setSearch] = useState( "" )
   const [places, setPlaces] = useState( [{}] )
   const [visible, setVisibility] = useState(false)
-
-  const provider = new OpenStreetMapProvider( )
-
-
-  useEffect( ( ) => {
-
-    provider.search({ query: search}).then( (res) => {
-      setPlaces(res)
-      setVisibility(true)
-    })
-  }, [search] )
-  
-  
-  const places_query = ( e : any ) => {
-    setSearch(e.target.value)
-  }
-
-  const retrievePlace = ( place : any ) => {
-    setSelected( place )
-  }
-
-
-  console.log(selected,)
 
   return (
 
@@ -57,7 +35,8 @@ export const Map = ({ location, logout, user }: any) => {
       </MapContainer>
 
       <button id='logout-btn' onClick={logout}>Logout</button>
-      <SearchBar query={places_query} results={places} retrieve = {retrievePlace} visible={visible} setVisible = {setVisibility}/>
+      <Panel places={places} visible={visible} setVisibility={setVisibility} setPlaces={setPlaces} />
+     
     </>
       : <div className='loading-screen'>
         <Audio
