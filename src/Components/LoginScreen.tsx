@@ -1,11 +1,13 @@
 import GoogleLogin from 'react-google-login';
+import {ImFire} from 'react-icons/im'
+import '../Styles/Components/Login.scss'
 
 export const LoginScreen = ( { id, handleLogin, handleFailure } :any ) => {
     
     return (
         <div className={"login-screen"}>
 
-            <h1>Please login with your gmail account</h1>
+            <h1 className={"first-header"}>Crisis Watch <span><ImFire/></span></h1>
 
             <GoogleLogin
             clientId={id}
