@@ -5,7 +5,7 @@ import { createContext, useState } from 'react'
 import { LoginScreen } from './Components/LoginScreen';
 
 let loginItem: string = localStorage.getItem('loginData') as string
-const userContext = createContext(null)
+const UserContext = createContext(null)
 
 export const App = () => {
 
@@ -21,7 +21,7 @@ export const App = () => {
   const location = useGeoLocation()
 
   const handleFailure = (result: any) => {
-    alert(result);
+    alert("Failed to Log in, Please choose a valid Gmail Account");
   };
 
   const handleLogin = async (googleData: any) => {
@@ -46,18 +46,20 @@ export const App = () => {
 
 
 
-  return (<>
+  return (
+  <UserContext.Provider value={loginData}>
     {
       loginData ?
 
-        <userContext.Provider value={loginData}>
+        
           <Map location={location} logout= {handleLogout} user={loginData} />
-        </userContext.Provider>
+        
         
         :
 
         <LoginScreen id={id} handleFailure={handleFailure} handleLogin={handleLogin}/>
     }
-  </>
+    </UserContext.Provider>
+  
   );
 }
