@@ -41,4 +41,3 @@ app.listen(process.env.PORT || 5000, () => {
   );
 });
 
-export const reactID = () => {return (process.env.REACT_CLIENT_ID)}
