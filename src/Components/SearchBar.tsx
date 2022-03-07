@@ -1,32 +1,38 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import '../Styles/Components/SearchBar.scss'
 
-export const SearchBar = ( { query, results, retrieve,visible,setVisible } : any ) => {
+export const SearchBar = ({ query, results, retrieve, visible, setVisible }: any) => {
 
     const [placeHolder, setPlaceHolder] = useState("")
+    const reference : any = useRef();
 
     return (
         <div className="search-bar">
 
-            <input type={"text"} onChange={query || ''} placeholder={placeHolder}/>
+            <input ref={reference} type={"text"}  onChange={query || ''} placeholder={placeHolder} />
+           
+            <div className={"result-wrapper"}>
+                {results && results.map(
 
-            {results && results.map(
+                    (place: any) => {
+                        return (
 
-                ( place : any ) => {
-                    return (
-                       
-                        
-                           visible ? <div key={place.raw.place_id} className="result" onClick = { ( ) => { 
+
+                            visible ? <div key={place.raw.place_id} className="result" onClick={() => {
                                 retrieve(place)
                                 setPlaceHolder(place.label)
                                 setVisible(false)
-                                }}>
-                                 {place.label}
-                                 </div> : ""
-                       
-                    )
-                }
-            )}
+                                reference.current.value = ""
+                            }}>
+                                {place.label}
+                            </div> : ""
+
+                        )
+                    }
+                )}
+
+            </div>
+
         </div>
     )
 }

@@ -4,37 +4,42 @@ import { SearchBar } from "./SearchBar"
 import '../Styles/Components/Panel.scss'
 import {FaSearchLocation} from 'react-icons/fa'
 
-const provider = new OpenStreetMapProvider()
+const provider = new OpenStreetMapProvider({
+  params: {
 
+    countrycodes: 'za', // limit search results to the Netherlands
+  },
+})
 
-export const Panel = ({ places, visible, setVisibility, setPlaces, addCrisis, panel }: any) => {
+export const Panel = ({ places, visible, setVisibility,
+   setPlaces, addCrisis, panel }: any) => {
 
   const [phone, setPhone] = useState('');
   const [description, setDescription] = useState('');
   const [tag, setTag] = useState('fire');
   const [place, setSelected] = useState("")
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const crisis = { phone, description, tag, place };
-
-    addCrisis(crisis)
-    setPhone('')
-    setDescription('')
-
-    console.log(crisis, "selected");
-  }
   const [search, setSearch] = useState("")
 
   useEffect(() => {
 
     provider.search({ query: search }).then((res: any) => {
+
       setPlaces(res)
       setVisibility(true)
-      console.log(res)
     })
-  }, [search,visible,setVisibility,setPlaces])
+  }, [search,setVisibility,setPlaces])
 
+  
+  const handleSubmit = (e: any) => {
+
+    e.preventDefault();
+
+    const crisis = { phone, description, tag, place };
+    
+    addCrisis(crisis)
+    setPhone('')
+    setDescription('')
+  }
 
   const places_query = (e: any) => {
     setSearch(e.target.value)
@@ -44,9 +49,9 @@ export const Panel = ({ places, visible, setVisibility, setPlaces, addCrisis, pa
     setSelected(place)
   }
 
-  return (<>
-  {panel ? 
-    <div className="panel">
+  return (
+
+    <div className={ panel ? "panel" : "hidden-panel" }>
       <h2 className="header-1">Search <span><FaSearchLocation/></span></h2>
       <SearchBar query={places_query} results={places} retrieve={retrievePlace} visible={visible} setVisible={setVisibility} />
       <h2>Report Crisis</h2>
@@ -78,11 +83,6 @@ export const Panel = ({ places, visible, setVisibility, setPlaces, addCrisis, pa
         <input type={"submit"}/>
       </form>
       
-    </div> :
-    ""
-
-}
-  </>
-    
+    </div>   
   )
 }
