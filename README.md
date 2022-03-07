@@ -14,10 +14,24 @@ npm ci
 ```powershell
 npm i
 ```
+## Run on Express/Node server
 
-First run the node server on http://localhost:5000 by 
-typing this into the terminal
+To serve on the project on an express server, first build the project with the following 
+npm command.
 
+```powershell
+npm run build
+```
+
+Then run the Express server on http://localhost:5000 by 
+typing this into the terminal.
+
+```powershell
+node server.js
+```
+## Run React project (Developement mode)
+
+First start the express server with 
 ```powershell
 node server.js
 ```
