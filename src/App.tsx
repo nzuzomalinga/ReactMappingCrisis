@@ -4,8 +4,9 @@ import { Map } from './Components/Map';
 import { createContext, useState } from 'react'
 import { LoginScreen } from './Components/LoginScreen';
 
-let loginItem: string = localStorage.getItem('loginData') as string
-const UserContext = createContext(null)
+const loginItem: string = localStorage.getItem('loginData') as string
+//const id: string = "33851024663-ovd2n28igfo9kpp2s92hq47bqjjlgjs2.apps.googleusercontent.com"
+const key: string | undefined = process.env.REACT_APP_CLIENT_ID
 
 export const App = () => {
 
@@ -15,14 +16,14 @@ export const App = () => {
       : null
   );
 
-  
-
-  const id: string = "33851024663-ovd2n28igfo9kpp2s92hq47bqjjlgjs2.apps.googleusercontent.com"
+    
   const location = useGeoLocation()
 
   const handleFailure = (result: any) => {
     alert("Failed to Log in, Please choose a valid Gmail Account");
   };
+
+  console.log(key,"this is the key")
 
   const handleLogin = async (googleData: any) => {
     const res = await fetch('/api/google-login', {
@@ -44,22 +45,13 @@ export const App = () => {
     setLoginData(null);
   };
 
-
-
   return (
-  <UserContext.Provider value={loginData}>
-    {
+    
       loginData ?
-
         
-          <Map location={location} logout= {handleLogout} user={loginData} />
-        
-        
+          <Map location={location} logout= {handleLogout} user={loginData} /> 
         :
 
-        <LoginScreen id={id} handleFailure={handleFailure} handleLogin={handleLogin}/>
-    }
-    </UserContext.Provider>
-  
+        <LoginScreen id={key} handleFailure={handleFailure} handleLogin={handleLogin}/>
   );
 }
