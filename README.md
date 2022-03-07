@@ -28,3 +28,10 @@ typing this into a seperate terminal
 ```powershell
 npm run start
 ```
+
+## Styling 
+
+Navigate to the styles > variables folder.
+
+From here you'll be able to change all the major stytling attributes by changing the values of
+the exported variables within the "colors.scss" and "utils.scss" files
