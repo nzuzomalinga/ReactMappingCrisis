@@ -5,7 +5,7 @@ const { OAuth2Client } = require('google-auth-library');
 
 dotenv.config();
 
-const client = new OAuth2Client(process.env.REACT_CLIENT_ID);
+const client = new OAuth2Client(process.env.REACT_APP_CLIENT_ID);
 
 const app = express();
 app.use(express.json());
@@ -40,4 +40,3 @@ app.listen(process.env.PORT || 5000, () => {
     `Server is ready at http://localhost:${process.env.PORT || 5000}`
   );
 });
-
