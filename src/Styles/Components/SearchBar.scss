@@ -1,9 +1,16 @@
 .search-bar {
+position: relative;
 
->div{
-    background: white;
-    font-size: 12px;
-    padding: 10px;
-}
+.result-wrapper{
+    position: absolute;
+
+    z-index: 10000;
+    .result{
+        background: white;
+        font-size: 12px;
+        padding: 10px;
     
+    }   
+}
+
 }

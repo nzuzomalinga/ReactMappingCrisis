@@ -1,8 +1,10 @@
+@use '../Variables/utils.scss';
+
 .login-screen{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    font-size: utils.$login-font-size;
     height: 100%;
-
 }

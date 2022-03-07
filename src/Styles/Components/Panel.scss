@@ -1,3 +1,6 @@
+@use '../Variables/colors.scss';
+@use '../Variables//utils.scss';
+
 .panel {
     display: flex;
     flex-direction: column;
@@ -5,9 +8,12 @@
     left: 0;
     height: 100vh;
     width: 40vw;
-    background: rgba(122, 127, 138, 0.849);
     padding: 20px 30px;
     z-index: 30;
+    border-right: utils.$panel-border ;
+    background: utils.$panel-background-color;
+    background-image: utils.$panel-background-image;
+    transition: transform 2s;
 
     >h2, label {
       color:#1c361d
@@ -52,4 +58,9 @@
         cursor: pointer;
       }
    
+}
+
+.hidden-panel {
+  transform: translateX(-100%);
+
 }
