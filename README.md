@@ -47,5 +47,5 @@ npm run start
 
 Navigate to the styles > variables folder.
 
-From here you'll be able to change all the major stytling attributes by changing the values of
+From here you'll be able to change all the major styling attributes by changing the values of
 the exported variables within the "colors.scss" and "utils.scss" files

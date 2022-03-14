@@ -21,13 +21,6 @@ export const Map = ({ location, logout, user }: any) => {
     setCrisis([...crisis, newCrisis])
   }
 
-  const polyline: any = [
-    [51.505, -0.09],
-    [51.51, -0.1],
-    [51.51, -0.12],
-  ]
-  const limeOptions = { color: 'lime' }
-
   const getDistanceFromLatLonInKm = (lat1: number, lon1: number, lat2: number, lon2: number) => {
     //REFRENECE: https://en.wikipedia.org/wiki/Haversine_formula
 

@@ -30,9 +30,7 @@ export const SearchBar = ({ query, results, retrieve, visible, setVisible }: any
                         )
                     }
                 )}
-
             </div>
-
         </div>
     )
 }
