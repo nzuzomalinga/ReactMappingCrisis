@@ -5,7 +5,7 @@ import { createContext, useState } from 'react'
 import { LoginScreen } from './Components/LoginScreen';
 
 const loginItem: string = localStorage.getItem('loginData') as string
-//const id: string = "33851024663-ovd2n28igfo9kpp2s92hq47bqjjlgjs2.apps.googleusercontent.com"
+
 const key: string | undefined = process.env.REACT_APP_CLIENT_ID
 
 export const App = () => {
@@ -22,8 +22,6 @@ export const App = () => {
   const handleFailure = (result: any) => {
     alert("Failed to Log in, Please choose a valid Gmail Account");
   };
-
-  console.log(key,"this is the key")
 
   const handleLogin = async (googleData: any) => {
     const res = await fetch('/api/google-login', {
